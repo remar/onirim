@@ -1,0 +1,27 @@
+html {
+    background-color: #000;
+}
+body {
+    font-family: "Courier New";
+    font-size: 13px;
+    color: #0f0;
+}
+#in {
+    display: block;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 8px;
+    border-color: #fff;
+    border-width: 1px 0 0 0;
+    background-color: #000;
+    color: #0f0;
+}
+p {
+    margin: 0;
+    padding: 0;
+}
+#out {
+    overflow: auto;
+}

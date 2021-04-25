@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <script src="onirim.js"></script>
+    <link rel="stylesheet" href="console.css">
+  </head>
+  <body>
+    <div id="out"></div>
+    <input id="in" tabindex="0" onkeydown="keyDown(event)"/>
+    <script type="text/javascript">
+      function write(text) {
+	  var p = document.createElement("p");
+	  p.innerHTML = text;
+	  var output = document.getElementById("out");
+	  output.appendChild(p);
+	  p.scrollIntoView(); // TODO: Doesn't really work, maybe do iframe?
+      }
+
+      function keyDown(event) {
+	  if(event.keyCode === 13) {
+	      var input = document.getElementById("in");
+	      write(input.value);
+	      if(input.value === "cls") {
+		  document.getElementById("out").innerHTML = "";
+	      }
+	      input.value = "";
+	  }
+      }
+
+      write("Welcome to Onirim - Console Version");
+    </script>
+  </body>
+</html>
