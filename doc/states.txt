@@ -1,0 +1,14 @@
+@startuml
+hide empty description
+state CardPlayed <<choice>>
+state CheckVictory <<choice>>
+
+[*] --> EmptyHand: Setup deck
+EmptyHand --> LimboToBeReshuffled: Draw hand
+LimboToBeReshuffled -> AwaitingPlay: Shuffle limbo pile\ninto draw deck
+AwaitingPlay -> CardPlayed: Play card in labyrinth
+CardPlayed --> CheckVictory: Trigger door?
+CardPlayed -> Refill: No door trigger?
+CheckVictory -> Refill: Not all 8 doors
+CheckVictory --> Victory: All 8 doors found
+@enduml
