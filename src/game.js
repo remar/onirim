@@ -13,14 +13,8 @@ class Game {
 
     setup() {
 	if (this.state === Game.toBeSetup) {
-	    this.addStandardCards();
+	    new DeckBuilder(this.deck).addStandardCards();
 	    this.gameState = Game.emptyHand;
-	}
-    }
-
-    addStandardCards() {
-	for(var i = 0;i < 72;i++) {
-	    this.deck.putCard("hej");
 	}
     }
 }
