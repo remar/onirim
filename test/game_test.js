@@ -128,5 +128,21 @@ describe("Game", function() {
 		hasCards(this.game.deck, {}, 0);
 	    });
 	});
-    })
+    });
+
+    describe("draw hand", function() {
+	beforeEach(function() {
+	    this.game.setup();
+	});
+
+	it("has 5 cards", function() {
+	    this.game.drawHand();
+	    expect(this.game.hand.length).toEqual(5);
+	});
+
+	it("ends up in shuffle limbo state", function() {
+	    this.game.drawHand();
+	    expect(this.game.state).toEqual(Game.shuffleLimbo);
+	})
+    });
 });
