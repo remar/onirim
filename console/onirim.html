@@ -1,15 +1,15 @@
 <html>
   <head>
     <script src="onirim.js"></script>
-    <script src="console.js"></script>
+    <script src="Console.js"></script>
+    <script src="OnirimConsole.js"></script>
     <link rel="stylesheet" href="console.css">
   </head>
   <body>
     <div id="out"></div>
     <input id="in" tabindex="0"/>
     <script type="text/javascript">
-      const console = new Console(document.getElementById("in"), document.getElementById("out"));
-      console.write("Welcome to Onirim - Console Version");
+      const onirim = new OnirimConsole(document.getElementById("in"), document.getElementById("out"));
     </script>
   </body>
 </html>

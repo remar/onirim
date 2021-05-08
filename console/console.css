@@ -7,6 +7,7 @@ body {
     color: #0f0;
 }
 #in {
+    font-family: "Courier New";
     display: block;
     position: fixed;
     left: 0;

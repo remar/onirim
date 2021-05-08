@@ -1,7 +1,8 @@
 class Console {
-    constructor(input, output) {
+    constructor(input, output, inputHandler) {
 	this.input = input;
 	this.output = output;
+	this.inputHandler = inputHandler;
 	this.input.addEventListener("keydown", this.keyDown.bind(this));
     }
 
@@ -14,10 +15,7 @@ class Console {
 
     keyDown(event) {
 	if(event.keyCode === 13) {
-	    this.write(this.input.value);
-	    if(this.input.value === "cls") {
-		document.getElementById("out").innerHTML = "";
-	    }
+	    this.inputHandler(this.input.value);
 	    this.input.value = "";
 	}
     }
