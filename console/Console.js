@@ -13,6 +13,10 @@ class Console {
         p.scrollIntoView(); // TODO: Doesn't really work, maybe do iframe?
     }
 
+    clear() {
+        this.output.innerHTML = '';
+    }
+
     keyDown(event) {
         if(event.keyCode === 13) {
             this.inputHandler(this.input.value);
