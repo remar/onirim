@@ -1,17 +1,17 @@
 class CardPile {
     constructor() {
-	this.cards = [];
+        this.cards = [];
     }
 
     numberOfCards() {
-	return this.cards.length;
+        return this.cards.length;
     }
 
     putCard(card) {
-	this.cards.push(card);
+        this.cards.push(card);
     }
 
     drawCard() {
-	return this.cards.pop();
+        return this.cards.pop();
     }
 }
