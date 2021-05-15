@@ -5,7 +5,8 @@ class Game {
 
     constructor() {
         this.deck = new Deck();
-        this.hand = [];
+        this.hand = new Hand();
+        this.limboPile = new CardPile();
         this.gameState = Game.toBeSetup;
     }
 
@@ -16,16 +17,26 @@ class Game {
     setup() {
         if(this.state === Game.toBeSetup) {
             new DeckBuilder(this.deck).addStandardCards();
+            this.deck.shuffle();
             this.gameState = Game.emptyHand;
         }
     }
 
     drawHand() {
         if(this.state === Game.emptyHand) {
-            while(this.hand.length < 5) {
-                this.hand.push(this.deck.drawCard());
+            while(this.hand.numberOfCards() < 5) {
+                this.drawCard();
             }
             this.gameState = Game.shuffleLimbo;
+        }
+    }
+
+    drawCard() {
+        const drawnCard = this.deck.drawCard();
+        if (drawnCard.type === Card.location) {
+            this.hand.putCard(drawnCard);
+        } else {
+            this.limboPile.putCard(drawnCard);
         }
     }
 }

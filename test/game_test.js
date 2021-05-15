@@ -128,6 +128,10 @@ describe("Game", function() {
                 hasCards(this.game.deck, {}, 0);
             });
         });
+
+        it("has shuffled deck", function() {
+            expect(deckIsOrdered(this.game.deck)).toEqual(false);
+        });
     });
 
     describe("draw hand", function() {
@@ -137,12 +141,25 @@ describe("Game", function() {
 
         it("has 5 cards", function() {
             this.game.drawHand();
-            expect(this.game.hand.length).toEqual(5);
+            expect(this.game.hand.numberOfCards()).toEqual(5);
         });
 
         it("ends up in shuffle limbo state", function() {
             this.game.drawHand();
             expect(this.game.state).toEqual(Game.shuffleLimbo);
         })
+
+        function addCards(deck, cards) {
+            cards.forEach(c => deck.putCard(makeCard(c)));
+        }
+    
+        it("puts door card in limbo pile", function() {
+            addCards(this.game.deck, ["LRm", "LRm", "LRm", "LRm", "DR", "LRm"]);
+            this.game.drawHand();
+            const wantedCard = makeCard("LRm");
+            while(this.game.hand.numberOfCards() > 0) {
+                expect(this.game.hand.drawCard().type).toEqual(Card.location);
+            }
+        });
     });
 });

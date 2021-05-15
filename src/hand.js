@@ -1,0 +1,3 @@
+class Hand extends CardPile {
+
+}

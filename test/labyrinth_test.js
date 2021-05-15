@@ -3,26 +3,10 @@ describe("Labyrinth", function() {
         this.labyrinth = new Labyrinth();
     });
 
-    function makeLocationCard(spec) {
-        colors = {
-            "G": Card.green,
-            "R": Card.red
-        };
-        symbols = {
-            "s": Card.sun,
-            "m": Card.moon
-        }
-        return new Card({
-            type: Card.location,
-            color: colors[spec[0]],
-            symbol: symbols[spec[1]]
-        })
-    }
-
     function addCards(labyrinth, cards) {
         cards.forEach(c => labyrinth.put(makeLocationCard(c)));
     }
-    
+
     it("is empty from the beginning", function() {
         expect(this.labyrinth.numberOfCards()).toEqual(0);
     });
