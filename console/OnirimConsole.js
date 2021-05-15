@@ -8,7 +8,9 @@ class OnirimConsole {
     inputHandler(text) {
         const commands = {
             p: this.printState.bind(this),
-            setup: this.setup.bind(this)
+            setup: this.setup.bind(this),
+            draw: () => this.game.drawHand(),
+            cls: () => this.console.clear()
         };
         if(Object.keys(commands).includes(text)) {
             commands[text]();
@@ -18,7 +20,10 @@ class OnirimConsole {
     }
 
     printState() {
+        this.console.write("------------------------");
         this.console.write("Deck: " + this.game.deck.numberOfCards());
+        this.console.write("Hand: " + this.game.hand.numberOfCards());
+        this.console.write("Limbo: " + this.game.limboPile.numberOfCards());
     }
 
     setup() {
