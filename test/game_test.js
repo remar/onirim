@@ -156,7 +156,6 @@ describe("Game", function() {
         it("puts door card in limbo pile", function() {
             addCards(this.game.deck, ["LRm", "LRm", "LRm", "LRm", "DR", "LRm"]);
             this.game.drawHand();
-            const wantedCard = makeCard("LRm");
             while(this.game.hand.numberOfCards() > 0) {
                 expect(this.game.hand.drawCard().type).toEqual(Card.location);
             }
