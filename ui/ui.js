@@ -1,3 +1,5 @@
+var zOrder = 100;
+
 function setup() {
     let app = new PIXI.Application({width: 256, height: 256});
     app.renderer.view.style.position = "absolute";
@@ -6,29 +8,39 @@ function setup() {
     app.renderer.resize(1480, 720); // TODO: Decide on good size for play area
     document.body.appendChild(app.view);
     
+    app.stage.sortableChildren = true;
+
     const cardTexture = PIXI.Texture.from("card.png");
+    const playmat = new PIXI.Sprite(PIXI.Texture.from("playmat.png"));
+    playmat.x = 0;
+    playmat.y = 0;
+    app.stage.addChild(playmat);
 
     let card;
 
-    //Create the card sprite
-    card = new PIXI.Sprite(cardTexture);
-
-    card.anchor.set(0.5);
-
-    card.interactive = true;
-    card.buttonMode = true;
-
     app.ticker.add(delta => gameLoop(delta));
 
-    card.on('pointerdown', onDragStart)
-        .on('pointerup', onDragEnd)
-        .on('pointerupoutside', onDragEnd)
-        .on('pointermove', onDragMove);
+    for(var i = 0;i < 5;i++) {
+        //Create the card sprite
+        card = new PIXI.Sprite(cardTexture);
 
-    app.stage.addChild(card);
+        card.anchor.set(0.5);
 
-    card.x = 500;
-    card.y = 300;
+        card.interactive = true;
+        card.buttonMode = true;
+        card.scale.x = 2;
+        card.scale.y = 2;
+
+        card.on('pointerdown', onDragStart)
+            .on('pointerup', onDragEnd)
+            .on('pointerupoutside', onDragEnd)
+            .on('pointermove', onDragMove);
+
+        app.stage.addChild(card);
+
+        card.x = 500 + i*40;
+        card.y = 300;
+    }
 
     function gameLoop(delta) {
     }
@@ -41,6 +53,8 @@ function onDragStart(event) {
     this.data = event.data;
     this.alpha = 0.7;
     this.dragging = true;
+    this.zIndex = zOrder;
+    zOrder++;
 }
 
 function onDragEnd() {
@@ -48,6 +62,7 @@ function onDragEnd() {
     this.dragging = false;
     // set the interaction data to null
     this.data = null;
+    console.log(this.x + "," + this.y + "," + this.zIndex);
 }
 
 function onDragMove() {
